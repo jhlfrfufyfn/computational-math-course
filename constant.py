@@ -18,6 +18,8 @@ CONST_E = [
     , [0, 0, 0, 0, 1]
 ]
 
+EPS = 0.00001
+
 
 def swap_columns(my_array, col1, col2):
     temp = np.copy(my_array[:, col1])
@@ -66,3 +68,22 @@ def divide_by_diagonal(A, b=np.zeros(5)):
         for j in range(a_cols):
             A[i][j] /= pivot
         b[i] /= pivot
+
+
+def calcNorm1(x_new, x):
+    n = x.shape[0]
+    return np.sqrt(sum((x_new[i] - x[i]) ** 2 for i in range(n)))
+
+
+def calcNorm2(x_new, x):
+    summ = 0
+    for i in range(x.shape[0]):
+        summ += (np.abs(x_new[i] - x[i]))
+    return summ
+
+
+def calcNorm3(x_new, x):
+    maxi = 1000
+    for i in range(x.shape[0]):
+        maxi = max(maxi, np.abs(x_new[i] - x[i]))
+    return maxi

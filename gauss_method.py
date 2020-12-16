@@ -13,6 +13,7 @@ def gauss_method(A, b):
     Aw = np.copy(A)
     Bw = np.copy(b)
     p = np.array(np.zeros(a_n), dtype=np.int8)
+    count_perm = 0
     for i in range(a_n):
         p[i] = i
 
@@ -24,6 +25,8 @@ def gauss_method(A, b):
                 max_in_row = abs(Aw[step][j])
                 max_column = j
 
+        if step == max_column:
+            count_perm+=1
         swap_columns(Aw, step, max_column)
         p[step], p[max_column] = swap_values(p[step], p[max_column])
 
@@ -46,6 +49,7 @@ def gauss_method(A, b):
     for i in range(a_n):
         newx[p[i]] = x[i]
 
+    a_det = a_det*((-1)**count_perm)
     return newx, a_det
 
 
