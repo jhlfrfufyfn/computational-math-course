@@ -1,4 +1,5 @@
 import numpy as np
+from sympy import *
 
 CONST_A = [
     [0.7424, 0.0000, -0.1939, 0.1364, 0.2273]
@@ -16,6 +17,14 @@ CONST_E = [
     , [0, 0, 1, 0, 0]
     , [0, 0, 0, 1, 0]
     , [0, 0, 0, 0, 1]
+]
+
+CONST_AEig = [
+    [0.7424, 0.0000, - 0.1939, 0.1364, 0.2273]
+    , [-0.0455, 0.4848, 0.0000, - 0.0924, 0.0303]
+    , [0.0152, - 0.1364, 0.8787, 0.0167, 0.0530]
+    , [0.0455, 0.0000, - 0.1106, 0.8787, 0.0000]
+    , [0.0303, - 0.0455, 0.2197, - 0.0182, 0.6363]
 ]
 
 EPS = 0.00001
@@ -70,20 +79,25 @@ def divide_by_diagonal(A, b=np.zeros(5)):
         b[i] /= pivot
 
 
-def calcNorm1(x_new, x):
-    n = x.shape[0]
-    return np.sqrt(sum((x_new[i] - x[i]) ** 2 for i in range(n)))
-
-
-def calcNorm2(x_new, x):
+def calc_vector_norm(x_new, x):
     summ = 0
     for i in range(x.shape[0]):
         summ += (np.abs(x_new[i] - x[i]))
     return summ
 
 
-def calcNorm3(x_new, x):
-    maxi = 1000
-    for i in range(x.shape[0]):
-        maxi = max(maxi, np.abs(x_new[i] - x[i]))
-    return maxi
+def print_system(A):
+    A = Matrix(A)
+    print(A.eigenvects())
+
+
+def print_poly(A):
+    A = Matrix(A)
+    lamda = symbols('λ')
+    p = A.charpoly(lamda)
+    print((p.as_expr()))
+
+
+# we check residual vector x_i
+def get_res_eig_value(A, x_i, la):
+    return np.dot(A, x_i) - la * x_i

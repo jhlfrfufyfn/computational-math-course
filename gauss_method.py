@@ -93,13 +93,14 @@ if __name__ == "__main__":
     b = np.array(constant.CONST_B)
 
     (x, det) = gauss_method(A, b)
-    print("x = \n", x)
-    print("det(A) = \n", det)
+    print("Решение СЛАУ:", x)
+    print("Определитель:", det)
     r = get_residual_vector(A, x, b)
-    print("r = Ax - b = \n", r)
+    print("Вектор невязок:", r)
+    print("Норма вектора невязок:", constant.calc_vector_norm(r, np.zeros(r.shape[0])))
 
     a_inverse = get_inverse_matrix(A)
-    print("A^(-1) = \n", a_inverse)
-    print("A*A^(-1) = \n", np.matmul(A, a_inverse))
+    print("Обратная матрица:", a_inverse)
+    print("Норма матрицы A*A^(-1) - Е =", constant.get_norm(np.matmul(A, a_inverse)-constant.CONST_E))
 
-    print("v(a) = \n", get_cond(A, a_inverse))
+    print("Число обусловленности:", get_cond(A, a_inverse))

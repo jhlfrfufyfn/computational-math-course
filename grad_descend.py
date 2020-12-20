@@ -13,12 +13,13 @@ def grad_descend(A, f):
         new_x = x - par * r
         r = np.dot(A, new_x) - f
         par = np.dot(r, r) / np.dot(np.dot(A, r), r)
-        converge = constant.calcNorm1(new_x, x) <= constant.EPS
+        converge = constant.calc_vector_norm(new_x, x) <= constant.EPS
         x = new_x
         n_iterations += 1
-    print("iterations: ", n_iterations)
-    print("x = \n", x)
-    print("r = ", r)
+    print("iterations:", n_iterations)
+    print("x =", x)
+    print("r =", r)
+    print("||r|| =", constant.calc_vector_norm(r, np.zeros(r.shape[0])))
 
 
 if __name__ == "__main__":

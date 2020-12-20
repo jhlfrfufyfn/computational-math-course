@@ -24,10 +24,12 @@ def rotation_method(A, b):
 
 
 if __name__ == "__main__":
-    a_matr = np.array(constant.CONST_A,dtype=np.float64)
+    a_matr = np.array(constant.CONST_A)
     b_vect = np.array(constant.CONST_B)
     rotation_method(a_matr, b_vect)
     constant.divide_by_diagonal(a_matr, b_vect)
     x = constant.backward(a_matr, b_vect)
-    print("x = ", x)
-    print("r = Ax - b = ", constant.get_residual_vector(constant.CONST_A, x, constant.CONST_B))
+    print("Решение СЛАУ:", x)
+    r = constant.get_residual_vector(constant.CONST_A, x, constant.CONST_B)
+    print("Вектор невязки", r)
+    print("Норма вектора невязки:", constant.calc_vector_norm(r, np.zeros(r.shape[0])))
