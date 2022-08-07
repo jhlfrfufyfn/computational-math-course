@@ -32,4 +32,5 @@ if __name__ == "__main__":
     print("Решение СЛАУ:", x)
     r = constant.get_residual_vector(constant.CONST_A, x, constant.CONST_B)
     print("Вектор невязки", r)
-    print("Норма вектора невязки:", constant.calc_vector_norm(r, np.zeros(r.shape[0])))
+    print("Норма вектора невязки:",
+          constant.calc_vector_norm(r, np.zeros(r.shape[0])))

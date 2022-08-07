@@ -26,7 +26,7 @@ def gauss_method(A, b):
                 max_column = j
 
         if step == max_column:
-            count_perm+=1
+            count_perm += 1
         swap_columns(Aw, step, max_column)
         p[step], p[max_column] = swap_values(p[step], p[max_column])
 
@@ -55,9 +55,7 @@ def gauss_method(A, b):
 
 def test_gauss():
     matrix = np.array([
-        [4, 2, -2]
-        , [2, 1, 2]
-        , [8, 6, 6]
+        [4, 2, -2], [2, 1, 2], [8, 6, 6]
     ], dtype=np.float64)
 
     b = np.zeros(3)
@@ -97,10 +95,12 @@ if __name__ == "__main__":
     print("Определитель:", det)
     r = get_residual_vector(A, x, b)
     print("Вектор невязок:", r)
-    print("Норма вектора невязок:", constant.calc_vector_norm(r, np.zeros(r.shape[0])))
+    print("Норма вектора невязок:",
+          constant.calc_vector_norm(r, np.zeros(r.shape[0])))
 
     a_inverse = get_inverse_matrix(A)
     print("Обратная матрица:", a_inverse)
-    print("Норма матрицы A*A^(-1) - Е =", constant.get_norm(np.matmul(A, a_inverse)-constant.CONST_E))
+    print("Норма матрицы A*A^(-1) - Е =",
+          constant.get_norm(np.matmul(A, a_inverse)-constant.CONST_E))
 
     print("Число обусловленности:", get_cond(A, a_inverse))

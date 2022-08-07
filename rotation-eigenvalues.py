@@ -57,7 +57,8 @@ def rotation_eigvals(A, eps):
 
 
 if __name__ == "__main__":
-    A = np.array(np.dot(np.array(np.transpose(constant.CONST_AEig)), constant.CONST_AEig))
+    A = np.array(
+        np.dot(np.array(np.transpose(constant.CONST_AEig)), constant.CONST_AEig))
     A_proc, T_col = rotation_eigvals(A, constant.EPS)
     print("T_col = ", T_col)
     x = []
@@ -71,7 +72,8 @@ if __name__ == "__main__":
         print(T_col[:, i])
     print("соответствующие СВ невязки: ")
     for i in range(A.shape[0]):
-        print(constant.calc_vector_norm(constant.get_res_eig_value(A, T_col[:, i], x[i]), np.zeros(A.shape[0])))
+        print(constant.calc_vector_norm(constant.get_res_eig_value(
+            A, T_col[:, i], x[i]), np.zeros(A.shape[0])))
     q = [1., -2.9425016, 3.21092995, -1.59721911, 0.35597774, -0.02865035]
     print("невязки собственных значений:")
     for val in x:
